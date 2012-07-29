@@ -14,7 +14,7 @@ String settings = "5::/thing:{\"name\":\"setup\",\"args\":[{\"name\":\"Candy mac
 
 // Enter a MAC address for your controller below.
 // Newer Ethernet shields have a MAC address printed on a sticker on the shield
-byte mac[] = { 0x90, 0xA2, 0xDA, 0x00, 0x66, 0x8B };
+byte mac[] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
 
 
 char serverName[] = "thing.everymote.com";
