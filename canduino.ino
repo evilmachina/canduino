@@ -19,8 +19,8 @@ long lastHeartbeat = 0;
 void setup() {
   
   Serial.begin(57600);
-  //Serial.print("Started...");
-  fixSettings();
+  Serial.print("Started...");
+  
    pinMode(ledPin, OUTPUT);
   if (Ethernet.begin(mac) == 0) {
     //Serial.print("Failed to configure Ethernet using DHCP");
@@ -37,12 +37,6 @@ void setup() {
   ////Serial.print();
 }
 
-void fixSettings(){
-//String rawSettings = "5::/thing:{\"name\":\"setup\",\"args\":[{\"name\":\"Candy machine\",\"id\":\"85af8fc7-9c8c-4896-ae5a-24f1f1609a6b\",\"position\":{\"lat\":[lat],\"lon\":[lon]},\"functions\":[{\"button\":\"Give\"}]}]}";
-settings.replace("[lat]", lat);
-settings.replace("[lon]", lon);
-//Serial.print(settings);
-}
 
 boolean Connect(){
   if(client.connected()) return true;
@@ -224,8 +218,8 @@ void sendSetup(){
   //Serial.print("sending setup");
   client.write((byte)0x81); //start
   client.write((byte)0x7e); //??
-  client.write((byte)0x00); //??
-  client.write((byte)settings.length());//183); //lengt
+  client.write((byte)((settings.length() >> 8) & 0xff)); //??
+  client.write((byte)(settings.length() & 0xff) );//183); //lengt
   client.print(settings);  
 //client.print("5::/thing:{\"name\":\"setup\",\"args\":[{\"name\":\"Candy machine\",\"id\":\"85af8fc7-9c8c-4896-ae5a-24f1f1609a6b\",\"position\":{\"lat\":55.5972022,\"lon\":12.9793127},\"functions\":[{\"button\":\"Give\"}]}]}");
   }
